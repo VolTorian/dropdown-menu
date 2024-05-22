@@ -1,6 +1,6 @@
-const dropdownButton = document.getElementById("dropdown-button");
-dropdownButton.onclick = greet;
+const dropdown = document.getElementById("dropdown-test");
+dropdown.onclick = toggleDropdown;
 
-function greet() {
-    console.log("Hello, world!");
+function toggleDropdown(event) {
+    event.target.nextElementSibling.classList.toggle("open");
 }

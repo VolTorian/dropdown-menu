@@ -1,3 +1,7 @@
-#dropdown-content {
+.dropdown-content {
     display: none;
+}
+
+.open {
+    display: block;
 }
