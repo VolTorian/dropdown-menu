@@ -1,5 +1,8 @@
 .dropdown-content {
     display: none;
+    position: absolute;
+    background-color: lightgray;
+    padding: 3px;
 }
 
 .open {
