@@ -1,3 +1,5 @@
+import './styles.css';
+
 const dropdown = document.getElementById("dropdown-test");
 dropdown.onclick = toggleDropdown;
 document.addEventListener("click", closeDropdown);
