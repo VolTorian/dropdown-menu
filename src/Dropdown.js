@@ -23,6 +23,23 @@ class Dropdown {
             contentItem.textContent = item;
             this.content.appendChild(contentItem);
         });
+
+        this.button.addEventListener("click", this.toggleDropdown);
+    }
+
+    toggleDropdown(event) {
+        event.target.nextElementSibling.classList.toggle("open");
+    }
+}
+
+document.addEventListener("click", closeDropdown);
+
+function closeDropdown(event) {
+    if (!event.target.classList.contains("dropdown-button")) {
+        let elements = document.getElementsByClassName("dropdown-content");
+        Array.from(elements).forEach((element) => {
+            element.classList.remove("open");
+        });
     }
 }
 
