@@ -28,9 +28,18 @@ class Dropdown {
     }
 
     toggleDropdown(event) {
-        event.target.nextElementSibling.classList.toggle("open");
+        const menu = event.target.nextElementSibling;
+
+        if (Dropdown.currentOpenMenu && Dropdown.currentOpenMenu !== menu) {
+            Dropdown.currentOpenMenu.classList.remove("open");
+        }
+
+        menu.classList.toggle("open");
+        Dropdown.currentOpenMenu = menu;
     }
 }
+
+Dropdown.currentOpenMenu = null;
 
 document.addEventListener("click", closeDropdown);
 
