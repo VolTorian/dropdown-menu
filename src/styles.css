@@ -1,5 +1,6 @@
 .dropdown {
     display: inline-block;
+    position: relative;
 }
 
 .dropdown-content {
@@ -7,6 +8,8 @@
     position: absolute;
     background-color: lightgray;
     padding: 3px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .open {
