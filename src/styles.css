@@ -7,11 +7,20 @@
     display: none;
     position: absolute;
     background-color: lightgray;
-    padding: 3px;
     width: 100%;
     box-sizing: border-box;
 }
 
 .open {
     display: block;
+}
+
+.dropdown-content > div {
+    display: block;
+    padding: 3px;
+}
+
+.dropdown-content > div:hover {
+    background-color: white;
+    cursor: pointer;
 }
