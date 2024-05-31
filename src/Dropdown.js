@@ -1,13 +1,19 @@
 import './styles.css';
 
 class Dropdown {
-    constructor(elementId, contentArray) {
+    constructor(elementId, contentArray, options = {}) {
         this.target = document.getElementById(elementId);
 
         if (this.target === null) {
             console.log(`Element with ID ${elementId} not found!`);
             return;
         }
+
+        const defaultOptions = {
+            width: "fit",
+        };
+
+        const finalOptions = {...defaultOptions, ...options};
 
         this.target.classList.add("dropdown");
         this.button = document.createElement("button");
@@ -25,6 +31,11 @@ class Dropdown {
         });
 
         this.button.addEventListener("click", this.toggleDropdown);
+
+        if (finalOptions.width === "inherit") {
+            this.target.classList.add("options-width-inherit");
+            this.content.classList.add("options-width-inherit");
+        }
     }
 
     toggleDropdown(event) {
