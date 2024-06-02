@@ -23,7 +23,6 @@ class Dropdown {
         this.content = document.createElement("div");
         this.content.classList.add("dropdown-content");
         this.target.append(this.button, this.content);
-        this.itemCount = contentArray.length;
 
         contentArray.forEach((item) => {
             const contentItem = document.createElement("a");
@@ -57,7 +56,15 @@ class Dropdown {
         }
 
         const items = this.content.querySelectorAll("a");
-        for (let i = 0; i < items.length; i++) {
+
+        if (linksArray.length > items.length) {
+            console.log("input has more links than expected, ignoring extras");
+        }
+        if (linksArray.length < items.length) {
+            console.log("input has fewer links than expected");
+        }
+
+        for (let i = 0; i < Math.min(linksArray.length, items.length); i++) {
             items[i].href = linksArray[i];
         }
     }
