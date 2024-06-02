@@ -21,12 +21,12 @@
     display: block;
 }
 
-.dropdown-content > div {
+.dropdown-content > a {
     display: block;
     padding: 3px;
 }
 
-.dropdown-content > div:hover {
+.dropdown-content > a:hover {
     background-color: white;
     cursor: pointer;
 }

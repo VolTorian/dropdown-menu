@@ -23,9 +23,10 @@ class Dropdown {
         this.content = document.createElement("div");
         this.content.classList.add("dropdown-content");
         this.target.append(this.button, this.content);
+        this.itemCount = contentArray.length;
 
         contentArray.forEach((item) => {
-            const contentItem = document.createElement("div");
+            const contentItem = document.createElement("a");
             contentItem.textContent = item;
             this.content.appendChild(contentItem);
         });
@@ -47,6 +48,18 @@ class Dropdown {
 
         menu.classList.toggle("open");
         Dropdown.currentOpenMenu = menu;
+    }
+
+    setLinks(linksArray) {
+        if (!Array.isArray(linksArray)) {
+            console.log("input is not an array");
+            return;
+        }
+
+        const items = this.content.querySelectorAll("a");
+        for (let i = 0; i < items.length; i++) {
+            items[i].href = linksArray[i];
+        }
     }
 }
 
