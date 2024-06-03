@@ -11,6 +11,7 @@ class Dropdown {
 
         const defaultOptions = {
             width: "fit",
+            stayOpenOnSelect: false,
         };
 
         const finalOptions = {...defaultOptions, ...options};
@@ -35,6 +36,11 @@ class Dropdown {
         if (finalOptions.width === "inherit") {
             this.target.classList.add("options-width-inherit");
             this.content.classList.add("options-width-inherit");
+        }
+
+        if (finalOptions.stayOpenOnSelect === true) {
+            const items = this.content.querySelectorAll("a");
+            items.forEach((item) => item.classList.add("stay-open-on-select"));
         }
     }
 
@@ -75,7 +81,7 @@ Dropdown.currentOpenMenu = null;
 document.addEventListener("click", closeDropdown);
 
 function closeDropdown(event) {
-    if (!event.target.classList.contains("dropdown-button")) {
+    if (!event.target.classList.contains("dropdown-button") && !event.target.classList.contains("stay-open-on-select")) {
         let elements = document.getElementsByClassName("dropdown-content");
         Array.from(elements).forEach((element) => {
             element.classList.remove("open");
