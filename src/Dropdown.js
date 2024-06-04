@@ -25,10 +25,13 @@ class Dropdown {
         this.content.classList.add("dropdown-content");
         this.target.append(this.button, this.content);
 
+        const dropdownItems = [];
+
         contentArray.forEach((item) => {
             const contentItem = document.createElement("a");
             contentItem.textContent = item;
             this.content.appendChild(contentItem);
+            dropdownItems.push(contentItem);
         });
 
         this.button.addEventListener("click", this.toggleDropdown);
@@ -39,8 +42,7 @@ class Dropdown {
         }
 
         if (finalOptions.stayOpenOnSelect === true) {
-            const items = this.content.querySelectorAll("a");
-            items.forEach((item) => item.classList.add("stay-open-on-select"));
+            dropdownItems.forEach((item) => item.classList.add("stay-open-on-select"));
         }
     }
 
