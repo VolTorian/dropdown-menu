@@ -73,7 +73,9 @@ class Dropdown {
         }
 
         for (let i = 0; i < Math.min(linksArray.length, items.length); i++) {
-            items[i].href = linksArray[i];
+            if (linksArray[i] != "") {
+                items[i].href = linksArray[i];
+            }
         }
     }
 }
