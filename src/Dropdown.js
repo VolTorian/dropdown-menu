@@ -75,6 +75,8 @@ class Dropdown {
         for (let i = 0; i < Math.min(linksArray.length, items.length); i++) {
             if (linksArray[i] != "") {
                 items[i].href = linksArray[i];
+                items[i].target = "_blank";
+                items[i].rel = "no referrer noopener";
             }
         }
     }
