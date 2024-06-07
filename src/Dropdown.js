@@ -12,6 +12,8 @@ class Dropdown {
         const defaultOptions = {
             width: "fit",
             stayOpenOnSelect: false,
+            allowHTML: false,
+            content: "",
         };
 
         const finalOptions = {...defaultOptions, ...options};
@@ -44,16 +46,21 @@ class Dropdown {
         if (finalOptions.stayOpenOnSelect === true) {
             dropdownItems.forEach((item) => item.classList.add("stay-open-on-select"));
         }
+
+        if (finalOptions.allowHTML === true && finalOptions.content !== "") {
+            this.button.innerHTML = finalOptions.content;
+        }
     }
 
     toggleDropdown(event) {
-        const menu = event.target.nextElementSibling;
+        const menu = event.currentTarget.nextElementSibling;
+        console.log(menu);
 
         if (Dropdown.currentOpenMenu && Dropdown.currentOpenMenu !== menu) {
             Dropdown.currentOpenMenu.classList.remove("open");
         }
 
-        menu.classList.toggle("open");
+        menu.classList.add("open");
         Dropdown.currentOpenMenu = menu;
     }
 
@@ -87,7 +94,26 @@ Dropdown.currentOpenMenu = null;
 document.addEventListener("click", closeDropdown);
 
 function closeDropdown(event) {
-    if (!event.target.classList.contains("dropdown-button") && !event.target.classList.contains("stay-open-on-select")) {
+    let targetElement = event.target;
+    let isDropdownButton = false;
+    let hasStayOpenProp = false;
+    while (targetElement) {
+        if (targetElement.classList) {
+            if (targetElement.classList.contains("dropdown-button")) {
+                isDropdownButton = true;
+            }
+            if (targetElement.classList.contains("stay-open-on-select")) {
+                hasStayOpenProp = true;
+            }
+        }
+
+        if (isDropdownButton && hasStayOpenProp) {
+            break;
+        }
+        targetElement = targetElement.parentElement;
+    }
+    
+    if (!isDropdownButton && !hasStayOpenProp) {
         let elements = document.getElementsByClassName("dropdown-content");
         Array.from(elements).forEach((element) => {
             element.classList.remove("open");
