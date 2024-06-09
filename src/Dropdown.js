@@ -54,13 +54,12 @@ class Dropdown {
 
     toggleDropdown(event) {
         const menu = event.currentTarget.nextElementSibling;
-        console.log(menu);
 
         if (Dropdown.currentOpenMenu && Dropdown.currentOpenMenu !== menu) {
             Dropdown.currentOpenMenu.classList.remove("open");
         }
 
-        menu.classList.add("open");
+        menu.classList.toggle("open");
         Dropdown.currentOpenMenu = menu;
     }
 
