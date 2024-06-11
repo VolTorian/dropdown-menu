@@ -60,7 +60,12 @@ class Dropdown {
         }
 
         menu.classList.toggle("open");
-        Dropdown.currentOpenMenu = menu;
+        if (menu.classList.contains("open")) {
+            Dropdown.currentOpenMenu = menu;
+        }
+        else {
+            Dropdown.currentOpenMenu = null;
+        }
     }
 
     setLinks(linksArray) {
@@ -117,6 +122,7 @@ function closeDropdown(event) {
         Array.from(elements).forEach((element) => {
             element.classList.remove("open");
         });
+        Dropdown.currentOpenMenu = null;
     }
 }
 
