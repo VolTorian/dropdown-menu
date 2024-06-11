@@ -52,6 +52,17 @@ class Dropdown {
         }
     }
 
+    openDropdown(event) {
+        const menu = event.currentTarget.nextElementSibling;
+
+        if (Dropdown.currentOpenMenu && Dropdown.currentOpenMenu !== menu) {
+            Dropdown.currentOpenMenu.classList.remove("open");
+        }
+
+        menu.classList.add("open");
+        Dropdown.currentOpenMenu = menu;
+    }
+
     toggleDropdown(event) {
         const menu = event.currentTarget.nextElementSibling;
 
