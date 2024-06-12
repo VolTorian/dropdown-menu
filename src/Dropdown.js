@@ -14,6 +14,7 @@ class Dropdown {
             stayOpenOnSelect: false,
             allowHTML: false,
             content: "",
+            openType: "click",
         };
 
         const finalOptions = {...defaultOptions, ...options};
@@ -36,7 +37,15 @@ class Dropdown {
             dropdownItems.push(contentItem);
         });
 
-        this.button.addEventListener("click", this.toggleDropdown);
+        
+        if (finalOptions.openType === "hover") {
+            this.button.addEventListener("mouseenter", this.openDropdown);
+            // this.target.classList.add("open-type-hover");
+            dropdownItems.forEach((item) => item.classList.add("open-type-hover"));
+        }
+        else {
+            this.button.addEventListener("click", this.toggleDropdown);
+        }
 
         if (finalOptions.width === "inherit") {
             this.target.classList.add("options-width-inherit");
@@ -106,9 +115,10 @@ class Dropdown {
 
 Dropdown.currentOpenMenu = null;
 
-document.addEventListener("click", closeDropdown);
+document.addEventListener("click", closeClickDropdowns);
+document.addEventListener("mouseover", closeHoverDropdowns);
 
-function closeDropdown(event) {
+function closeClickDropdowns(event) {
     let targetElement = event.target;
     let isDropdownButton = false;
     let hasStayOpenProp = false;
@@ -129,6 +139,17 @@ function closeDropdown(event) {
     }
     
     if (!isDropdownButton && !hasStayOpenProp) {
+        let elements = document.getElementsByClassName("dropdown-content");
+        Array.from(elements).forEach((element) => {
+            element.classList.remove("open");
+        });
+        Dropdown.currentOpenMenu = null;
+    }
+}
+
+function closeHoverDropdowns(event) {
+    let targetElement = event.target;
+    if (!targetElement.classList.contains("open-type-hover")) {
         let elements = document.getElementsByClassName("dropdown-content");
         Array.from(elements).forEach((element) => {
             element.classList.remove("open");
