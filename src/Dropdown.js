@@ -15,6 +15,7 @@ class Dropdown {
             allowHTML: false,
             content: "",
             openType: "click",
+            closeType: "externalClick",
         };
 
         const finalOptions = {...defaultOptions, ...options};
@@ -58,6 +59,13 @@ class Dropdown {
 
         if (finalOptions.allowHTML === true && finalOptions.content !== "") {
             this.button.innerHTML = finalOptions.content;
+        }
+
+        if (finalOptions.closeType === "toggle") {
+            //menu only closes when clicked again
+        }
+        else {
+            //default behavior: clicking outside of the menu closes it
         }
     }
 
@@ -139,6 +147,7 @@ function closeClickDropdowns(event) {
     }
     
     if (!isDropdownButton && !hasStayOpenProp) {
+        //make sure to exclude toggle closeType buttons
         let elements = document.getElementsByClassName("dropdown-content");
         Array.from(elements).forEach((element) => {
             element.classList.remove("open");
