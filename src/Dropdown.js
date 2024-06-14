@@ -42,6 +42,7 @@ class Dropdown {
         if (finalOptions.openType === "hover") {
             this.button.addEventListener("mouseenter", this.openDropdown);
             // this.target.classList.add("open-type-hover");
+            this.content.classList.add("open-type-hover-dropdown")
             dropdownItems.forEach((item) => item.classList.add("open-type-hover"));
         }
         else {
@@ -157,9 +158,10 @@ function closeClickDropdowns(event) {
 }
 
 function closeHoverDropdowns(event) {
+    // console.log(event.target);
     let targetElement = event.target;
     if (!targetElement.classList.contains("open-type-hover")) {
-        let elements = document.getElementsByClassName("dropdown-content");
+        let elements = document.querySelectorAll(".open-type-hover-dropdown");
         Array.from(elements).forEach((element) => {
             element.classList.remove("open");
         });
