@@ -47,6 +47,11 @@ class Dropdown {
         }
         else {
             this.button.addEventListener("click", this.toggleDropdown);
+
+            if (finalOptions.closeType === "toggle") {
+                //menu only closes when clicked again
+                this.content.classList.add("close-type-toggle-dropdown");
+            }
         }
 
         if (finalOptions.width === "inherit") {
@@ -60,13 +65,6 @@ class Dropdown {
 
         if (finalOptions.allowHTML === true && finalOptions.content !== "") {
             this.button.innerHTML = finalOptions.content;
-        }
-
-        if (finalOptions.closeType === "toggle") {
-            //menu only closes when clicked again
-        }
-        else {
-            //default behavior: clicking outside of the menu closes it
         }
     }
 
@@ -128,6 +126,7 @@ document.addEventListener("click", closeClickDropdowns);
 document.addEventListener("mouseover", closeHoverDropdowns);
 
 function closeClickDropdowns(event) {
+    // console.log(event.target);
     let targetElement = event.target;
     let isDropdownButton = false;
     let hasStayOpenProp = false;
@@ -151,7 +150,9 @@ function closeClickDropdowns(event) {
         //make sure to exclude toggle closeType buttons
         let elements = document.getElementsByClassName("dropdown-content");
         Array.from(elements).forEach((element) => {
-            element.classList.remove("open");
+            if (!element.classList.contains("close-type-toggle-dropdown")) {
+                element.classList.remove("open");
+            }
         });
         Dropdown.currentOpenMenu = null;
     }
