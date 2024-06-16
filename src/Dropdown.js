@@ -41,7 +41,6 @@ class Dropdown {
         
         if (finalOptions.openType === "hover") {
             this.button.addEventListener("mouseenter", this.openDropdown);
-            // this.target.classList.add("open-type-hover");
             this.content.classList.add("open-type-hover-dropdown")
             dropdownItems.forEach((item) => item.classList.add("open-type-hover"));
         }
@@ -49,7 +48,6 @@ class Dropdown {
             this.button.addEventListener("click", this.toggleDropdown);
 
             if (finalOptions.closeType === "toggle") {
-                //menu only closes when clicked again
                 this.content.classList.add("close-type-toggle-dropdown");
             }
         }
@@ -126,7 +124,6 @@ document.addEventListener("click", closeClickDropdowns);
 document.addEventListener("mouseover", closeHoverDropdowns);
 
 function closeClickDropdowns(event) {
-    // console.log(event.target);
     let targetElement = event.target;
     let isDropdownButton = false;
     let hasStayOpenProp = false;
@@ -147,7 +144,6 @@ function closeClickDropdowns(event) {
     }
     
     if (!isDropdownButton && !hasStayOpenProp) {
-        //make sure to exclude toggle closeType buttons
         let elements = document.getElementsByClassName("dropdown-content");
         Array.from(elements).forEach((element) => {
             if (!element.classList.contains("close-type-toggle-dropdown")) {
@@ -159,7 +155,6 @@ function closeClickDropdowns(event) {
 }
 
 function closeHoverDropdowns(event) {
-    // console.log(event.target);
     let targetElement = event.target;
     if (!targetElement.classList.contains("open-type-hover")) {
         let elements = document.querySelectorAll(".open-type-hover-dropdown");
